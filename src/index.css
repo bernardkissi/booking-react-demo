@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+   @apply antialiased font-sans bg-blue-50 flex flex-col h-screen;
+}
+
+.wizard-btn{
+  @apply text-sm md:text-base text-gray-400 uppercase font-medium leading-4
+}
+
+.form{
+  @apply p-4 mb-4 outline-none capitalize border-2 
+}
