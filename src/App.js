@@ -1,4 +1,5 @@
 import React from 'react'
+import SearchForm from './Forms/SearchForm'
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
             </div>
           </div>
           <div className="flex flex-col px-6 md:px-8 lg:px-12 py-8">
-           
+            <SearchForm />
           </div>
         </div>
       </section>

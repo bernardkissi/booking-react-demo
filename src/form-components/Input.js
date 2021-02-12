@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Input = (props) => {
+const Input = ({ type = 'text', placeholder, name, value, errors, refs}) => {
     return (
         <div>
            <input
-            className={props.errors ? "form border-red-400" : "form border-gray-200"}
-            type={props.type}
-            placeholder={props.placeholder}
-            name={props.name}
-            value={props.value}
-            ref={props.ref}
+            className={errors ? "form border-red-400" : "form border-gray-200"}
+            type={type}
+            placeholder={placeholder}
+            name={name}
+            value={value}
+            ref={refs}
             autoComplete="off" />
-        {props.errors[props.name] && <div>{props.errors[props.name].message}</div>} 
+            {errors && <div>{errors.name.message}</div>} 
         </div>
     )
 }

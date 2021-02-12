@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Select(props) {
+function Select({name, value, choices, errors, refs}) {
     return (
         <div>
-           <select className={props.error ? "form border-red-400" : "form border-gray-200"}
-            name={props.name}
-            value={props.value}
-            ref={props.ref}
+           <select className={errors ? "form border-red-400" : "form border-gray-200"}
+            name={name}
+            value={value}
+            ref={refs}
         >
-        {props.choices.map((choice:Choice, index:number): JSX.Element => (
+        {choices.map((choice, index) => (
             <option key={index} value={choice.value}>{choice.label}</option>
         ))}
         </select>
-        {props.error[props.name] && <div className="text-red-400">{props.error[props.name].message}</div>} 
+        {errors[name] && <div className="text-red-400">{errors[name].message}</div>} 
         </div>
     )
 }
