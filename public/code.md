@@ -46,3 +46,31 @@ flight details header
     
 // }
 // connect(mapStateToProps, mapDispatchToProps)
+
+const countries = [
+  austria: {
+    country: {value: '', type: 'input', placeholder: 'Enter your country of residence'},
+    city: {value: '', type: 'input', placeholder: 'Enter your city of residence'}
+  }
+  belgium:{
+    birthDate: {value: '', type: 'input', placeholder: 'Enter your date of birth eg. 01/01/1991'},
+    country: {value: '', type: 'input', placeholder: 'Enter your country of residence'},
+    city: {value: '', type: 'input', placeholder: 'Enter your city of residence'},
+  }
+  france:{
+    birthDate: {value: '', type: 'input', placeholder: 'Enter your date of birth eg. 01/01/1991'},
+    birthPlace: {value: '', type: 'input', placeholder: 'Enter your place of birth'},
+    country: {value: '', type: 'input', placeholder: 'Enter your country of residence'},
+    city: {value: '', type: 'input', placeholder: 'Enter your city'}                      
+  }
+  greece:{
+    passportIssue: {value: '', type: 'input', placeholder: 'Passport Date of Issue'}, 
+    expiryDate: {value: '', type: 'input', placeholder: 'Enter your passport expiry date'},
+    countryOfIssue: {value: '', type: 'input', placeholder: 'Enter your country of issue'},
+    cityOfIssue: {value: '', type: 'input', placeholder: 'Enter your city of issue'},
+  }
+  spain: { 
+    address: { value: '', type: 'input', placeholder: 'Enter your address'}
+  }
+]
+

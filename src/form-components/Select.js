@@ -1,22 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Select({name, value, choices, errors, refs}) {
+const Select = React.forwardRef(({name, value, choices, error, onChange}, ref)=> {
     return (
-        <div>
-           <select className={errors ? "form border-red-400" : "form border-gray-200"}
+        <div className="flex flex-col">
+           {error && <div className="bg-red-200 px-3 py-1 uppercase text-xs text-red-900 font-bold"> {error.message} </div>}
+           <select className={error ? "form border-red-400" : "form border-gray-200"}
             name={name}
             value={value}
-            ref={refs}
-        >
-        {choices.map((choice, index) => (
-            <option key={index} value={choice.value}>{choice.label}</option>
-        ))}
-        </select>
-        {errors[name] && <div className="text-red-400">{errors[name].message}</div>} 
+            ref={ref}
+            onChange={onChange}
+            >
+            {choices.map((choice, index) => (
+                <option key={index} value={choice.value}>{choice.label}</option>
+            ))}
+            </select>
         </div>
     )
-}
+})
 
 Select.propTypes = {
     name: PropTypes.string.isRequired,

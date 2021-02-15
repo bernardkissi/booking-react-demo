@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Input from './Input';
 import Select from './Select';
 
-const FormGenerator = React.forwardRef(({data, errors}, ref) => {
+const FormGenerator = React.forwardRef(({data, errors, onChange}, ref) => {
     let buildForm = [];
     for(const[key, val] of Object.entries(data)){
         if(val.type.split(':')[0] === 'input'){
@@ -12,9 +12,10 @@ const FormGenerator = React.forwardRef(({data, errors}, ref) => {
                 placeholder={val.placeholder}    
                 name={key}
                 value={val.value}
-                error={errors}
+                error={errors[key]}
                 ref={ref}
-                type={val.type.split(':')[1]}
+                onChange={onChange}
+                // watch={watch(key)}
             />);
         }
         if(val.type === 'select'){
@@ -23,20 +24,24 @@ const FormGenerator = React.forwardRef(({data, errors}, ref) => {
                 placeholder={val.placeholder}    
                 name={key}
                 choices={val.choices}
-                errors={val.errors}
-            />)
+                value={val.value}
+                errors={errors[key]}
+                onChange={onChange}
+            />)   
         }
+        
     }
     return (
-        <div>
+        <Fragment>
             {buildForm}
-        </div>
+        </Fragment>
     )
 })
 
 FormGenerator.propTypes = {
     data: PropTypes.object.isRequired,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    onChange: PropTypes.func.isRequired
 }
 
 export default FormGenerator
