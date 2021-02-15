@@ -49,16 +49,21 @@ const UserDetails = () => {
 
 
     useEffect(() => {
-        let newFields = []
-        if( formBuilder.FormData.nationality.value !== ''){
+        
+        if(formBuilder.FormData.nationality.value !== ''){
             const selected = countries.find(element => element.country === formBuilder.FormData.nationality.value);
             const data  = selected.fields.map(key => {
-                return Object.filter(formBuilder.FormData, ([name, field]) => field.key === key )
+                return Object.filter(passengerDetailsFields, ([name, field]) => field.key === key )
             })
-            console.log(data);
+            const newFields = data.reduce(((r, c) => Object.assign(r, c)), {});
+            setFormBuilder(() => ({
+                FormData:{
+                   ...newFields 
+                }
+            }))
         }
         console.log('after updating' )
-        console.log(formBuilder.FormData)
+        console.log(formBuilder.FormData.nationality)
         return 
     }, [formBuilder.FormData.nationality.value])
 
