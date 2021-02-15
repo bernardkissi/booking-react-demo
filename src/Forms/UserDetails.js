@@ -58,12 +58,14 @@ const UserDetails = () => {
             const newFields = data.reduce(((r, c) => Object.assign(r, c)), {});
             setFormBuilder(() => ({
                 FormData:{
-                   ...newFields 
+                   ...newFields,
+                   nationality: {
+                       ...newFields['nationality'],
+                       value: selected.country
+                   } 
                 }
             }))
         }
-        console.log('after updating' )
-        console.log(formBuilder.FormData.nationality)
         return 
     }, [formBuilder.FormData.nationality.value])
 
