@@ -13,6 +13,7 @@ const FlightSearch = yup.object().shape({
 });
 
 const countries = [
+    { country: '', fields:['_fn','_pn','_em','_nl','_ppn']},
     { country: 'austria', fields:['_fn','_nl', '_pn','_em','_ppn', '_cy', '_ct', '_ed']},
     { country: 'belgium', fields:['_fn','_nl', '_pn','_em','_ppn','_bd', '_cy', '_ct', '_ad']},
     { country: 'france', fields: ['_fn','_nl', '_pn','_em','_ppn', '_bp', '_bd', '_cy', '_ct']},
@@ -49,24 +50,22 @@ const UserDetails = () => {
 
 
     useEffect(() => {
-        
-        if(formBuilder.FormData.nationality.value !== ''){
-            const selected = countries.find(element => element.country === formBuilder.FormData.nationality.value);
-            const data  = selected.fields.map(key => {
-                return Object.filter(passengerDetailsFields, ([name, field]) => field.key === key )
-            })
-            const newFields = data.reduce(((r, c) => Object.assign(r, c)), {});
-            setFormBuilder(() => ({
-                FormData:{
-                   ...newFields,
-                   nationality: {
-                       ...newFields['nationality'],
-                       value: selected.country
-                   } 
+
+        const selected = countries.find(element => element.country === formBuilder.FormData.nationality.value);
+        const data  = selected.fields.map(key => {
+            return Object.filter(passengerDetailsFields, ([name, field]) => field.key === key )
+        })
+        const newFields = data.reduce(((r, c) => Object.assign(r, c)), {});
+        setFormBuilder(() => ({
+            FormData:{
+                ...newFields,
+                nationality: {
+                    ...newFields['nationality'],
+                    value: selected.country
                 }
-            }))
-        }
-        return 
+            }
+        }))
+       
     }, [formBuilder.FormData.nationality.value])
 
 

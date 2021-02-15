@@ -6,6 +6,18 @@ const passengerDetailsFields = {
             type: 'input',
             placeholder: 'Enter fullname'
         },
+        phoneNumber:{
+            key: '_pn',
+            value: '',
+            type: 'input',
+            placeholder: 'Enter mobile number'
+        },
+        email:{
+            key: '_em',
+            value: '',
+            type: 'input',
+            placeholder: 'Enter your email address'
+        },
         nationality:{
             key:'_nl',
             value: '',
@@ -18,18 +30,6 @@ const passengerDetailsFields = {
                 {value: 'greece', label:'Greece'},
                 {value: 'spain', label:'Spain'}
             ]
-        },
-        phoneNumber:{
-            key: '_pn',
-            value: '',
-            type: 'input',
-            placeholder: 'Enter mobile number'
-        },
-        email:{
-            key: '_em',
-            value: '',
-            type: 'input',
-            placeholder: 'Enter your email address'
         },
         passportNumber:{
             key: '_ppn',
