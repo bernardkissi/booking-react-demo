@@ -23,7 +23,7 @@ const passengerDetailsFields = {
             value: '',
             type: 'select',
             choices: [
-                {value: '', label:'Choose nationality'},
+                {value: '', label:'Choose your nationality'},
                 {value: 'austria', label:'Austria'},
                 {value: 'belgium', label:'Belgium'},
                 {value: 'france', label:'France'},

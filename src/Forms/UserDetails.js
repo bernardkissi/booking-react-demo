@@ -4,22 +4,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FormGenerator from '../form-components/FormGenerator'
 import passengerDetailsFields from '../form-components/form-fields/details';
+import countries from '../form-components/form-fields/countries';
 
-
-
-const FlightSearch = yup.object().shape({
-    flight: yup.string().required(),
-    lastname: yup.string().min(5).required(),
+const UserInformation = yup.object().shape({
+    fullName: yup.string().required(),
+    phoneNumber: yup.number().min(10).required(),
+    email: yup.string().email().required(),
+    passportNumber: yup.string().required(),
+    address: yup.string(),
+    birthDate: yup.date(),
+    expiryDate: yup.date()
 });
-
-const countries = [
-    { country: '', fields:['_fn','_pn','_em','_nl','_ppn']},
-    { country: 'austria', fields:['_fn','_nl', '_pn','_em','_ppn', '_cy', '_ct', '_ed']},
-    { country: 'belgium', fields:['_fn','_nl', '_pn','_em','_ppn','_bd', '_cy', '_ct', '_ad']},
-    { country: 'france', fields: ['_fn','_nl', '_pn','_em','_ppn', '_bp', '_bd', '_cy', '_ct']},
-    { country: 'greece', fields: ['_fn','_nl', '_pn','_em','_ppn', '_pi', '_cyi', '_cti','_ed']},
-    { country: 'spain', fields:  ['_fn','_nl', '_pn','_em','_ppn', '_ad']}
-]
 
 const UserDetails = () => {
 
@@ -28,7 +23,7 @@ const UserDetails = () => {
     })
 
     const { register, handleSubmit, errors } = useForm({
-        resolver: yupResolver(FlightSearch)
+        resolver: yupResolver(UserInformation)
     })
     
     const handleChange = e => {
@@ -50,7 +45,6 @@ const UserDetails = () => {
 
 
     useEffect(() => {
-
         const selected = countries.find(element => element.country === formBuilder.FormData.nationality.value);
         const data  = selected.fields.map(key => {
             return Object.filter(passengerDetailsFields, ([name, field]) => field.key === key )
@@ -65,7 +59,7 @@ const UserDetails = () => {
                 }
             }
         }))
-       
+       console.log(formBuilder.FormData.nationality.value)
     }, [formBuilder.FormData.nationality.value])
 
 
@@ -81,21 +75,13 @@ const UserDetails = () => {
                   errors={errors} 
                   onChange={handleChange} 
                 />
+                {formBuilder.FormData.nationality.value.length > 0 && <button type="submit" 
+                    className="outline-none focus:bg-blue-700 hover:bg-blue-600 p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">
+                    Your Save Details
+                </button>}
             </form>
         </div>
     )
 }
 
 export default UserDetails
-
-
-//handling change in value
-//1. create countries array with properties
-//2. access the state of the nationality (value)
-
-// use useEffect to run the entire procedure when (value changes)
-
-//
- //3. use find to get the country with properties
-        //4. then run object filter on the FormData to filter the form
-        //5. Pass that down as a prop to formGenerator..

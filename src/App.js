@@ -1,6 +1,8 @@
 import React from 'react'
-// import SearchForm from './forms/SearchForm'
 import UserDetails from './forms/UserDetails'
+import Switcher from './view-components/Switcher'
+// import SearchForm from './forms/SearchForm'
+
 
 function App() {
   return (
@@ -12,18 +14,7 @@ function App() {
             <h2 className="text-4xl font-light text-center">Please fill details and complete booking</h2>
             {/* <p className=" py-3 mx-auto max-w-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore optio delectus corporis labore veniam aliquid.</p> */}
           </div>
-          <div className="w-auto mx-2 md:w-2/3 md:mx-auto bg-white rounded-full my-8 px-2 py-1">
-              <div className="hidden lg:flex items-center justify-between">
-                <button className="bg-blue-500 rounded-full py-4 px-4 uppercase font-medium">Search Booking</button>
-                <button className="wizard-btn ">Complete details</button>
-                <button className="wizard-btn pr-6">Confirm Flight</button>
-              </div>
-              <div className="lg:hidden flex items-center justify-between">
-                <button className="bg-blue-500 rounded-full py-4 px-4 uppercase text-sm font-medium">Booking</button>
-                <button className="wizard-btn">Fill Details</button>
-                <button className="wizard-btn pr-3">Confirm</button>
-              </div>
-          </div>
+          <Switcher />
         </div> 
       </header>
       <section className="container mx-auto max-w-5xl flex justify-center">

@@ -45,7 +45,10 @@ const SearchForm = () => {
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormGenerator data={formBuilder.FormData} ref={register} errors={errors} onChange={handleChange}/>
-                <button type="submit" className="p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">Get Booking</button>
+                <button type="submit" 
+                className="outline-none focus:bg-blue-700 hover:bg-blue-600 p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">
+                Get Booking
+                </button>
             </form>
         </div>
     )
