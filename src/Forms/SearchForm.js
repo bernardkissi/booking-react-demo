@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import FormGenerator from '../form-components/FormGenerator';
-import fields from '../form-components/form-fields/details';
-import searchFlightFields from '../form-components/form-fields/search';
+import FormGenerator from '../components/form-components/FormGenerator';
+import fields from '../components/form-fields/details';
+import searchFlightFields from '../components/form-fields/search';
 
 const FlightSearch = yup.object().shape({
     flight: yup.string().required(),
@@ -46,8 +46,8 @@ const SearchForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormGenerator data={formBuilder.FormData} ref={register} errors={errors} onChange={handleChange}/>
                 <button type="submit" 
-                className="outline-none focus:bg-blue-700 hover:bg-blue-600 p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">
-                Get Booking
+                    className="focus:outline-none focus:bg-blue-700 hover:bg-blue-600 p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">
+                    Get Booking
                 </button>
             </form>
         </div>

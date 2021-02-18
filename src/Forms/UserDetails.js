@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import FormGenerator from '../form-components/FormGenerator'
-import passengerDetailsFields from '../form-components/form-fields/details';
-import countries from '../form-components/form-fields/countries';
+import FormGenerator from '../components/form-components/FormGenerator'
+import passengerDetailsFields from '../components/form-fields/details';
+import countries from '../components/form-fields/countries';
 
 const UserInformation = yup.object().shape({
     fullName: yup.string().required(),
@@ -76,7 +76,7 @@ const UserDetails = () => {
                   onChange={handleChange} 
                 />
                 {formBuilder.FormData.nationality.value.length > 0 && <button type="submit" 
-                    className="outline-none focus:bg-blue-700 hover:bg-blue-600 p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">
+                    className="focus:outline-none focus:bg-blue-700 hover:bg-blue-600 p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">
                     Your Save Details
                 </button>}
             </form>

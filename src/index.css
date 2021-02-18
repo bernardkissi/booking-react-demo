@@ -8,7 +8,11 @@ body{
 }
 
 .wizard-btn{
-  @apply text-sm md:text-base text-gray-400 uppercase font-medium leading-4
+  @apply focus:outline-none py-4 px-4 text-sm md:text-base text-gray-400 uppercase font-medium leading-4 
+}
+
+.wizard-active-btn{
+  @apply focus:outline-none focus:bg-blue-700 hover:bg-blue-600 bg-blue-500 rounded-full text-white shadow-lg
 }
 
 .form{
