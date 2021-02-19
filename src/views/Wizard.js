@@ -5,7 +5,7 @@ import UserDetails from '../forms/UserDetails'
 import { changeStep, fetchBookings } from '../store/reducers/usersSlice'
 import Switcher from '../views/Switcher'
 
-const Wizard = ({user, steps, stepChange, error, bookings}) => {
+const Wizard = ({user, steps, stepChange, error, bookings, status}) => {
     const [ headings] = useState(
         [   '',
             'Welcome to your flight check-in',
@@ -36,16 +36,23 @@ const Wizard = ({user, steps, stepChange, error, bookings}) => {
                         </div>}
                         {steps > 1 && <div className="mb-4 lg:mb-0">
                             <h3 className="text-base font-bold text-blue-500">PASSENGER</h3>
-                            <h3 className="text-xl font-normal uppercase text-gray-600">WELCOME, MISS {user.user.lastName}</h3>
+                            <h3 className="text-xl font-normal uppercase text-gray-600">WELCOME, MISS {user.booking.user.lastName}</h3>
                         </div>}
                         {steps > 1 && <div className="flex flex-col">
                             <h3 className="text-base font-bold text-blue-500">FLIGHT NUMBER</h3>
-                            <h4 className="font-normal text-gray-600 text-xl">{user.flight}</h4>
+                            <h4 className="font-normal text-gray-600 text-xl">{user.booking.flight}</h4>
                         </div>}
                     </div>
                 </div>
                 <div className="flex flex-col px-6 md:px-8 lg:px-12 py-8">
-                    { steps === 1 && <SearchForm  search={bookings}/> }
+                    { steps === 1 && <SearchForm  
+                        search={bookings} 
+                        // stepChange={stepChange} 
+                        status={status}
+                        // step={steps}
+                        error={error}
+                        />
+                    }
                     { steps === 2 && <UserDetails /> }
                     { steps === 3 && <div> hey check!! </div> }
                 </div>

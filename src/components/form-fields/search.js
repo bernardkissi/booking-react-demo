@@ -4,7 +4,7 @@ const searchFlightFields = {
         type: 'input',
         placeholder: 'Enter flight number'
     },
-    lastname:{
+    lastName:{
         value: '',
         type: 'input',
         placeholder: 'Enter lastname'

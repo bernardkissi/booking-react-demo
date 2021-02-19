@@ -2,15 +2,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 
 const initialState = {
-    user: {name:'owiredu', flight:'KLMOP657'},
+    user: {},
     steps: 1,
-    status: 'idle',
+    res: 'idle',
     error: null,
 }
 
-export const fetchBookings = createAsyncThunk('users/fetchBookings', async () => {
-    const { data } = await axios.get('/getBooking', {params:{lastName:'owiredu', flightNumber:'KLMOP5707'}})
-    return data.booking
+export const fetchBookings = createAsyncThunk('users/fetchBookings', async (passenger, {rejectWithValue}) => {
+    try{
+        const { data } = await axios.get('/getBooking', {params:passenger})
+        return data
+    }catch(err){
+        return rejectWithValue(err.response.data)
+    }
+    
 })
 
 export const addDetails = createAsyncThunk('posts/fetchPosts', async () => {
@@ -40,11 +45,12 @@ const userSlice = createSlice({
         },
         [fetchBookings.fulfilled]: (state, action) => {
             state.status = 'succeeded'
-            state.user = action.payload
+            state.user = {...action.payload}
+            state.steps = state.steps + 1
         },
         [fetchBookings.rejected]: (state, action) => {
             state.status = 'failed'
-            state.error = action.payload
+            state.error = {...action.payload}
         },
         [addDetails.fulfilled]: (state, action) => {
             state.user.details = action.payload

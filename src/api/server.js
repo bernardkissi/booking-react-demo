@@ -1,4 +1,4 @@
-import { Server, Model, belongsTo, RestSerializer, Factory,trait } from "miragejs"
+import { Server, Model, belongsTo, RestSerializer, Factory,trait, Response } from "miragejs"
 import faker from "faker"
 
 export default function makeServer() {
@@ -32,7 +32,7 @@ export default function makeServer() {
         withBooking: trait({
           afterCreate(user, server) {
             server.createList('booking', 1, {
-              user: user, flight: "KLMOP5707"
+              user: user, flight: "705707"
             });
           }
         }),
@@ -56,16 +56,17 @@ export default function makeServer() {
     },
     
     routes() {
+      this.timing = 2000; // default
       this.resource('user')
       this.resource('booking')
       this.get("/getBooking", (schema, request) => {
-           console.log(request.queryParams.flightNumber)
+           console.log(request.queryParams.flight)
            const user = this.schema.users.findBy({lastName:request.queryParams.lastName})
            if(user){
-              return user.booking.flight === request.queryParams.flightNumber? 
-                user.booking:"Your booking could not be found for this user"
+              return user.booking.flight === request.queryParams.flight? 
+                user.booking : new Response(400, { some: 'header' }, { errors: ['No booking was found for this user'] })
            }
-          return "No user record could be found"
+           return new Response(400, { payload: 'header' }, { errors: [ 'No user was found'] });
       })
     }
   
