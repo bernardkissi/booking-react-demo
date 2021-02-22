@@ -33,7 +33,11 @@ const SearchForm = ({search, status, error}) => {
 
     return (
         <div>
-            <div className="-mt-2 mb-3 px-6 py-3 bg-red-200 text-red-900 rounded-md">{error !== null ? error.errors[0] : ''}</div>
+            {error !== null && 
+                <div className="-mt-2 mb-3 px-6 py-3 bg-red-200 text-red-900 rounded-md">
+                    {error !== null ? error.errors[0] : ''}
+                </div>
+            }
             <form onSubmit={handleSubmit(search)}>
                 <FormGenerator data={formBuilder.FormData} ref={register} errors={errors} onChange={handleChange}/>
                 <button type="submit" 

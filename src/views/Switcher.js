@@ -12,7 +12,8 @@ const Switcher = ({step, stepChanger}) => {
                     Search Booking 
                 </button>
                 <button
-                    className={step === 2 ? "wizard-btn wizard-active-btn":"wizard-btn text-gray-400"}>
+                    className={step === 2 ? "wizard-btn wizard-active-btn":"wizard-btn text-gray-400" || 
+                    step > 2 ? "wizard-btn wizard-success-btn font-bold":""}>
                     Complete details
                 </button>
                 <button

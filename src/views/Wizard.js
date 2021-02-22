@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import SearchForm from '../forms/SearchForm'
 import UserDetails from '../forms/UserDetails'
-import { changeStep, fetchBookings } from '../store/reducers/usersSlice'
+import { addDetails, changeStep, fetchBookings } from '../store/reducers/usersSlice'
 import Switcher from '../views/Switcher'
 
-const Wizard = ({user, steps, stepChange, error, bookings, status}) => {
+const Wizard = ({user, steps, stepChange, error, bookings, status, createProfile}) => {
     const [ headings] = useState(
         [   '',
             'Welcome to your flight check-in',
@@ -45,15 +45,20 @@ const Wizard = ({user, steps, stepChange, error, bookings, status}) => {
                     </div>
                 </div>
                 <div className="flex flex-col px-6 md:px-8 lg:px-12 py-8">
-                    { steps === 1 && <SearchForm  
+                    { steps === 1 && 
+                     <SearchForm  
                         search={bookings} 
-                        // stepChange={stepChange} 
                         status={status}
-                        // step={steps}
                         error={error}
-                        />
+                      />
                     }
-                    { steps === 2 && <UserDetails /> }
+                    { steps === 2 && 
+                      <UserDetails 
+                        profile={createProfile}
+                        status={status} 
+                        user = {user.booking.user.lastName}
+                        error={error}/> 
+                    }
                     { steps === 3 && <div> hey check!! </div> }
                 </div>
                 </div>
@@ -70,7 +75,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
       stepChange: step => dispatch(changeStep(step)),
-      bookings: (passenger) => dispatch(fetchBookings(passenger))
+      bookings: passenger => dispatch(fetchBookings(passenger)),
+      createProfile: details => dispatch(addDetails(details))
     }
 }
 

@@ -15,7 +15,7 @@ body{
   @apply focus:outline-none focus:bg-blue-700 hover:bg-blue-600 bg-blue-500 rounded-full text-white shadow-lg
 }
 .wizard-success-btn{
-  @apply focus:outline-none  bg-green-300 rounded-full text-white 
+  @apply focus:outline-none  bg-green-300 rounded-full text-green-900 
 }
 
 .form-btn{

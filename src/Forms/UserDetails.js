@@ -16,7 +16,7 @@ const UserInformation = yup.object().shape({
     expiryDate: yup.date()
 });
 
-const UserDetails = () => {
+const UserDetails = ({profile, status, error}) => {
 
     const [formBuilder, setFormBuilder] = useState({
         FormData: passengerDetailsFields
@@ -62,22 +62,23 @@ const UserDetails = () => {
        console.log(formBuilder.FormData.nationality.value)
     }, [formBuilder.FormData.nationality.value])
 
-
-    const onSubmit = (data) => {
-        alert(JSON.stringify(data));
-    };
-
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            {error !== null && 
+                <div className="-mt-2 mb-3 px-6 py-3 bg-red-200 text-red-900 rounded-md">
+                    {error !== null ? error.errors[0] : ''}
+                </div>
+            }
+            <form onSubmit={handleSubmit(profile)}>
                 <FormGenerator data={formBuilder.FormData} 
                   ref={register} 
                   errors={errors} 
                   onChange={handleChange} 
                 />
                 {formBuilder.FormData.nationality.value.length > 0 && <button type="submit" 
-                    className="focus:outline-none focus:bg-blue-700 hover:bg-blue-600 p-4 text-white w-64 bg-blue-500 uppercase font-bold rounded">
-                    Your Save Details
+                    className={status === 'failed' ? "form-btn-danger":"form-btn"}>
+                    {status === 'loading' ? 'creating profile....': 'Save Details'}
+                    {status === 'failed' && '  again'}
                 </button>}
             </form>
         </div>
